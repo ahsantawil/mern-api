@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const port = '4000';
 const app = express();
@@ -24,5 +25,12 @@ app.use((error, req, res, next) => {
     const data = error.data;
     res.status(status).json({ message: message, data: data });
 })
+
+mongoose.connect('mongodb://localhost:27017/db_blog', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+});
 
 app.listen(port, ()=> console.log(`Running on Port ${port}`));
