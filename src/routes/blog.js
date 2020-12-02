@@ -9,4 +9,11 @@ router.post('/post', [
     body('body').isLength({ min: 5 }).withMessage('input isi artikel minimal 5 karakter')],
     blogController.createBlogPost);
 
+router.get('/posts', blogController.getAllBlogPost);
+router.get('/post/:postId', blogController.getAllBlogPostById);
+router.put('/post/:postId', [
+    body('title').isLength({ min: 5 }).withMessage('Input Title minimal 5 karakter'),
+    body('body').isLength({ min: 5 }).withMessage('input isi artikel minimal 5 karakter')],
+    blogController.updateBlogPost);
+
 module.exports =  router;
